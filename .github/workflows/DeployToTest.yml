@@ -12,10 +12,10 @@ jobs:
     steps:
       - name: Output URL
         id: output_url
-        run: echo https://api.trello.com/1/cards/639b00b769acca01a2181b7a?name=Test1-${GITHUB_REF##*/}&key=${{ secrets.TRELLO_KEY }}&token=${{ secrets.TRELLO_TOKEN }}
+        run: echo "url=https://api.trello.com/1/cards/639b00b769acca01a2181b7a?name=Test1-${GITHUB_REF##*/}&key=${{ secrets.TRELLO_KEY }}&token=${{ secrets.TRELLO_TOKEN }}" >> $GITHUB_ENV
       - name: Update Trello Board 1
         uses: fjogeleit/http-request-action@v1
         if: ${{ github.event.inputs.test_server == 1}}
         with:
-          url: ${{steps.output_url.output}}
+          url: ${{env.url}}
           method: "PUT"
