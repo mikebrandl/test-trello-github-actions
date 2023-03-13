@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        run: echo 'https://api.trello.com/1/cards/639b00b769acca01a2181b7a?name=Test1 - ${GITHUB_REF##*/}key=${{ secrets.TRELLO_KEY }}&token=${{ secrets.TRELLO_TOKEN }}'
+        run: echo https://api.trello.com/1/cards/639b00b769acca01a2181b7a?name=Test1 - ${GITHUB_REF##*/}key=${{ secrets.TRELLO_KEY }}&token=${{ secrets.TRELLO_TOKEN }}
       - name: GitHub Ref
         run: echo ${GITHUB_REF##*/}
       - name: Update Trello Board 1
         uses: fjogeleit/http-request-action@v1
         if: ${{ github.event.inputs.test_server == 1}}
         with:
-          url: "https://api.trello.com/1/cards/639b00b769acca01a2181b7a?name=Test1 - ${GITHUB_REF##*/}key=${{ secrets.TRELLO_KEY }}&token=${{ secrets.TRELLO_TOKEN }}"
+          url: https://api.trello.com/1/cards/639b00b769acca01a2181b7a?name=Test1 - ${GITHUB_REF##*/}key=${{ secrets.TRELLO_KEY }}&token=${{ secrets.TRELLO_TOKEN }}
           method: "PUT"
